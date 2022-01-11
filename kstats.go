@@ -2,6 +2,28 @@ package kstats
 
 import "math"
 
+// Permutations calculates the number of possible permutations of k choices from n options (i.e. order matters).
+func Permutations(n int, k int) int {
+	var n_bang int
+	n_bang = 1
+	for i := 0; i < k; i++ {
+		n_bang *= n - i
+	}
+	return n_bang
+}
+
+// Combinations calculates the number of possible combionations of k choices from n options (i.e. order doesn't matter).
+func Combinations(n int, k int) int {
+	var n_bang, k_bang int
+	n_bang = 1
+	k_bang = 1
+	for i := 0; i < k; i++ {
+		n_bang *= n - i
+		k_bang *= k - i
+	}
+	return n_bang / k_bang
+}
+
 // Mean calculates a point estimate of the mean of an array of observations.
 func Mean(x []float64) float64 {
 	var n, sm, mn float64
