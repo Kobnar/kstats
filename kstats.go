@@ -12,6 +12,17 @@ func SampleMean(obs []float64) float64 {
 	return mean
 }
 
+// WeightedMean calculates a weighted mean of an array of observations given an array of weights.
+func WeightedMean(obs []float64, wgts []float64) float64 {
+	var obs_sum, wgts_sum, mean float64
+	for i := 0; i < len(obs); i++ {
+		obs_sum += obs[i] * wgts[i]
+		wgts_sum += wgts[i]
+	}
+	mean = obs_sum / wgts_sum
+	return mean
+}
+
 // SampleVariance calculates a point estimate of the variance of an array of observations.
 func SampleVariance(obs []float64) float64 {
 	var sample_mean, squared_error, sample_variance float64
@@ -23,3 +34,5 @@ func SampleVariance(obs []float64) float64 {
 	sample_variance = squared_error / float64(len(obs)-1)
 	return sample_variance
 }
+
+//
