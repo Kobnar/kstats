@@ -57,12 +57,12 @@ type HypergeometricPMF struct {
 	N, K, n int
 }
 
-func (dist HypergeometricPMF) f(n, k int) float64 {
+func (dist HypergeometricPMF) f(k int) float64 {
 	var num, den int
 	var pb float64
 	num = Combinations(dist.K, k)
-	num *= Combinations(dist.N-dist.K, n-k)
-	den = Combinations(dist.N, n)
+	num *= Combinations(dist.N-dist.K, dist.n-k)
+	den = Combinations(dist.N, dist.n)
 	pb = float64(num) / float64(den)
 	return pb
 }
