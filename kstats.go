@@ -124,6 +124,22 @@ func DiscreteVariance(a, b int, f func(int) float64) float64 {
 	return vr
 }
 
+// StandardError returns an estimate of the standard deviation of a sample with a known distribution.
+func StandardError(n int, sd float64) float64 {
+	var n_ float64
+	n_ = float64(n)
+	return sd / math.Sqrt(n_)
+}
+
+// FiniteStandardError returns an estimate of the standard deviation of a finite resample with a known distribution.
+func FiniteStandardError(n, N int, sd float64) float64 {
+	var Nn_, N1_, k float64
+	Nn_ = float64(N - n)
+	N1_ = float64(N - 1)
+	k = math.Sqrt(Nn_ / N1_)
+	return k * StandardError(n, sd)
+}
+
 // ZScore calculates the z-score for a particular observation.
 func ZScore(x float64, mn float64, sd float64) float64 {
 	return (x - mn) / sd
