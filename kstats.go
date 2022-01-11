@@ -23,6 +23,17 @@ func WeightedMean(obs []float64, wgts []float64) float64 {
 	return mean
 }
 
+// GeometricMean calculates a geometric mean of an array of observations (used in geometic growth contexts).
+func GeometricMean(obs []float64) float64 {
+	var prod, mean float64
+	prod = 1.0
+	for i := 0; i < len(obs); i++ {
+		prod *= obs[i]
+	}
+	mean = math.Pow(prod, 1.0/float64(len(obs)))
+	return mean
+}
+
 // SampleVariance calculates a point estimate of the variance of an array of observations.
 func SampleVariance(obs []float64) float64 {
 	var sample_mean, squared_error, sample_variance float64
