@@ -104,6 +104,26 @@ func CorrelationCoefficient(x, y []float64, sample bool) float64 {
 	return xy_cr
 }
 
+// DiscreteExpectedValue returns the expected value of a discrete probability distribution.
+func DiscreteExpectedValue(a, b int, f func(int) float64) float64 {
+	var ev float64
+	for x := a; x <= b; x++ {
+		ev += float64(x) * f(x)
+	}
+	return ev
+}
+
+// DiscreteVariance returns the variance of a discrete probability distribution.
+func DiscreteVariance(a, b int, f func(int) float64) float64 {
+	var mn, vr float64
+	mn = DiscreteExpectedValue(a, b, f)
+	for x := a; x <= b; x++ {
+		diff := float64(x) - mn
+		vr += math.Pow(diff, 2) * f(x)
+	}
+	return vr
+}
+
 // ZScore calculates the z-score for a particular observation.
 func ZScore(x float64, mn float64, sd float64) float64 {
 	return (x - mn) / sd
