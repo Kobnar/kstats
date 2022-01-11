@@ -4,11 +4,12 @@ import "math"
 
 // Mean calculates a point estimate of the mean of an array of observations.
 func Mean(x []float64) float64 {
-	var sm, mn float64
+	var n, sm, mn float64
+	n = float64(len(x))
 	for i := 0; i < len(x); i++ {
 		sm += x[i]
 	}
-	mn = sm / float64(len(x))
+	mn = sm / n
 	return mn
 }
 
@@ -35,15 +36,20 @@ func GeometricMean(x []float64) float64 {
 	return gmn
 }
 
-// SampleVariance calculates a point estimate of the variance of an array of observations.
-func SampleVariance(x []float64) float64 {
-	var mn, se, vr float64
+// Variance calculates a point estimate of the variance of an array of observations.
+func Variance(x []float64, sample bool) float64 {
+	var n, mn, se, vr float64
+	if sample {
+		n = float64(len(x) - 1)
+	} else {
+		n = float64(len(x))
+	}
 	mn = Mean(x)
 	for i := 0; i < len(x); i++ {
 		diff := x[i] - mn
 		se += math.Pow(diff, 2)
 	}
-	vr = se / float64(len(x)-1)
+	vr = se / n
 	return vr
 }
 
