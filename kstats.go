@@ -14,7 +14,7 @@ func Mean(x []float64) float64 {
 }
 
 // WeightedMean calculates a weighted mean of an array of observations given an array of weights.
-func WeightedMean(x []float64, w []float64) float64 {
+func WeightedMean(x, w []float64) float64 {
 	var xw_sm, w_sm, wmn float64
 	for i := 0; i < len(x); i++ {
 		xw_sm += x[i] * w[i]
@@ -54,7 +54,7 @@ func Variance(x []float64, sample bool) float64 {
 }
 
 // Covariance calculates the covariance of two arrays of observations.
-func Covariance(x []float64, y []float64, sample bool) float64 {
+func Covariance(x, y []float64, sample bool) float64 {
 	var n, x_mn, y_mn, xy_er, cv float64
 	if sample {
 		n = float64(len(x) - 1)
@@ -73,7 +73,7 @@ func Covariance(x []float64, y []float64, sample bool) float64 {
 }
 
 // CorrelationCoefficient calculates the pearson Product Moment Corrrelation Coefficient of two arrays of observations.
-func CorrelationCoefficient(x []float64, y []float64, sample bool) float64 {
+func CorrelationCoefficient(x, y []float64, sample bool) float64 {
 	var x_sd, y_sd, xy_cv, xy_cr float64
 	x_sd = math.Sqrt(Variance(x, sample))
 	y_sd = math.Sqrt(Variance(y, sample))
