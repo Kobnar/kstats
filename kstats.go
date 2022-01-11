@@ -72,6 +72,16 @@ func Covariance(x []float64, y []float64, sample bool) float64 {
 	return cv
 }
 
+// CorrelationCoefficient calculates the pearson Product Moment Corrrelation Coefficient of two arrays of observations.
+func CorrelationCoefficient(x []float64, y []float64, sample bool) float64 {
+	var x_sd, y_sd, xy_cv, xy_cr float64
+	x_sd = math.Sqrt(Variance(x, sample))
+	y_sd = math.Sqrt(Variance(y, sample))
+	xy_cv = Covariance(x, y, sample)
+	xy_cr = xy_cv / (x_sd * y_sd)
+	return xy_cr
+}
+
 // ZScore calculates the z-score for a particular observation.
 func ZScore(x float64, mn float64, sd float64) float64 {
 	return (x - mn) / sd
