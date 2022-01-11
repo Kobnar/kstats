@@ -46,4 +46,7 @@ func SampleVariance(obs []float64) float64 {
 	return sample_variance
 }
 
-//
+// ZScore calculates the z-score for a particular observation.
+func ZScore(obs float64, mean float64, sd float64) float64 {
+	return (obs - mean) / sd
+}
