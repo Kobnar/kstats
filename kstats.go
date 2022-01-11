@@ -36,7 +36,7 @@ func GeometricMean(x []float64) float64 {
 	return gmn
 }
 
-// Variance calculates a point estimate of the variance of an array of observations.
+// Variance calculates the variance of an array of observations.
 func Variance(x []float64, sample bool) float64 {
 	var n, mn, se, vr float64
 	if sample {
@@ -51,6 +51,25 @@ func Variance(x []float64, sample bool) float64 {
 	}
 	vr = se / n
 	return vr
+}
+
+// Covariance calculates the covariance of two arrays of observations.
+func Covariance(x []float64, y []float64, sample bool) float64 {
+	var n, x_mn, y_mn, xy_er, cv float64
+	if sample {
+		n = float64(len(x) - 1)
+	} else {
+		n = float64(len(x))
+	}
+	x_mn = Mean(x)
+	y_mn = Mean(y)
+	for i := 0; i < len(x); i++ {
+		x_diff := x[i] - x_mn
+		y_diff := y[i] - y_mn
+		xy_er += x_diff * y_diff
+	}
+	cv = xy_er / n
+	return cv
 }
 
 // ZScore calculates the z-score for a particular observation.
